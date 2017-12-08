@@ -10,13 +10,14 @@ OneWire oneWire(ONE_WIRE_BUS);
  
 // Pass our oneWire reference to Dallas Temperature.
 DallasTemperature sensors(&oneWire);
- 
+float Temp1;
+int Temp2;
+int Temp3;
 void setup(void)
 {
   // start serial port
   Serial.begin(9600);
   Serial.println("Dallas Temperature IC Control Library Demo");
-
   // Start up the library
   sensors.begin();
 }
@@ -31,7 +32,11 @@ void loop(void)
   Serial.println("DONE");
 
   Serial.print("Temperature is: ");
-  Serial.print(sensors.getTempCByIndex(0)); // Why "byIndex"? 
+  Temp1 = sensors.getTempCByIndex(0)*(9/5)+32;
+  Serial.print(Temp1,3); // Why "byIndex"? 
+  //Serial.print(sensors.getTempCByIndex(1));
+  //Serial.print(sensors.getTempCByIndex(2));
+
     // You can have more than one IC on the same bus. 
     // 0 refers to the first IC on the wire
     delay(1000);
