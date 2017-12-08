@@ -25,6 +25,18 @@ void setup(void)
   Serial.println("Begin Data Aquisition");
                                            // Start up the library
   sensors.begin();
+  
+  sensors.requestTemperatures();
+  Temp1 = sensors.getTempCByIndex(0)*(9/5)+32;
+  Temp2 = sensors.getTempCByIndex(1)*(9/5)+32;
+  Temp3 = sensors.getTempCByIndex(2)*(9/5)+32;  
+  Serial.print(DataPointTime,2);
+  Serial.print(", ");  
+  Serial.print(Temp1,2);
+  Serial.print(", ");                           
+  Serial.print(Temp2,2);
+  Serial.print(", ");    
+  Serial.println(Temp3, 2);
 }
  
  
@@ -33,13 +45,13 @@ void loop(void)
 CurrentTime = millis();
                                            // call sensors.requestTemperatures() to issue a global temperature
                                           // Send the command to get temperatures
-if(CurrentTime - PrintTime >= 10000){
+if(CurrentTime - PrintTime >= 10000 ){
   sensors.requestTemperatures();
   Temp1 = sensors.getTempCByIndex(0)*(9/5)+32;
   Temp2 = sensors.getTempCByIndex(1)*(9/5)+32;
   Temp3 = sensors.getTempCByIndex(2)*(9/5)+32;
   
-  DataPointTime = PrintTime/1000;
+  DataPointTime = PrintTime/1000+10;
   
   Serial.print(DataPointTime,2);
   Serial.print(", ");  
